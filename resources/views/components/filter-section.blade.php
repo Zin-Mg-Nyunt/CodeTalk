@@ -2,16 +2,7 @@
     <section id="filters" class="bg-white rounded-lg shadow p-6">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div class=" space-y-3">
-                <div class="flex items-center gap-3 flex-wrap">
-                    <div class="text-sm font-medium text-gray-700 min-w-20">Categories:</div>
-                    <div class="flex gap-2 flex-wrap">
-                        <a href="" class="px-3 py-1 text-sm bg-gray-100 rounded hover:bg-gray-200">All</a>
-                        <a href="" @class(["px-3 py-1 text-sm bg-indigo-50 rounded",'text-indigo-700' => true])>Tutorials</a>
-                        <a href="" class="px-3 py-1 text-sm bg-gray-100 rounded">Opinion</a>
-                        <a href="" class="px-3 py-1 text-sm bg-gray-100 rounded">Tools</a>
-                        <a href="" class="px-3 py-1 text-sm bg-gray-100 rounded">News</a>
-                    </div>
-                </div>
+                <x-category-component />
                 <div class="flex items-center gap-3 flex-wrap">
                     <div class="text-sm font-medium text-gray-700 min-w-20">Tags:</div>
                     <div class="flex gap-2 flex-wrap">

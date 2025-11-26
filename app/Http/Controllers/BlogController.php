@@ -12,4 +12,9 @@ class BlogController extends Controller
             "blogs" => Blog::paginate(4),
         ]);
     }
+    public function show(Blog $blog){
+        return view('blogs.show',[
+            "blog"=>$blog,
+        ]);
+    }
 }
