@@ -1,0 +1,24 @@
+    <!-- Sidebar: categories / popular tags / random blog -->
+    <aside class="space-y-6">
+        <div class="bg-white rounded-lg shadow p-4">
+            <h4 class="text-sm font-semibold text-gray-700">Popular Categories</h4>
+            <ul class="mt-3 text-sm space-y-2 text-gray-600">
+                <li><a href="#">Tutorials <span class="text-xs text-gray-400">(24)</span></a></li>
+                <li><a href="#">Opinion <span class="text-xs text-gray-400">(12)</span></a></li>
+                <li><a href="#">Tools <span class="text-xs text-gray-400">(18)</span></a></li>
+            </ul>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-4">
+            <h4 class="text-sm font-semibold text-gray-700">Popular Tags</h4>
+            <ul class="mt-3 text-sm space-y-2 text-gray-600">
+                <li><a href="#">PHP <span class="text-xs text-gray-400">(24)</span></a></li>
+                <li><a href="#">API <span class="text-xs text-gray-400">(12)</span></a></li>
+                <li><a href="#">UI <span class="text-xs text-gray-400">(18)</span></a></li>
+            </ul>
+        </div>
+
+        <x-random-blog-section />
+
+        <x-subscribed-card />
+    </aside>
