@@ -9,7 +9,9 @@ class BlogController extends Controller
 {
     public function index(){
         return view('blogs.index',[
-            "blogs" => Blog::paginate(4),
+            "blogs" => Blog::filter(request(['category','username','search']))
+                            ->paginate(4)
+                            ->withQueryString()
         ]);
     }
     public function show(Blog $blog){

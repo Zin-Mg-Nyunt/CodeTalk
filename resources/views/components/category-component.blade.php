@@ -4,7 +4,7 @@
     <div class="flex gap-2 flex-wrap">
         <a href="/" @class(["px-3 py-1 text-sm bg-indigo-50 rounded hover:bg-gray-200",'text-indigo-500 font-semibold' => !request('category')])>All</a>
         @foreach ($categories as $category)
-            <a href="/?category={{$category->slug}}" @class(["px-3 py-1 text-sm bg-indigo-50 rounded hover:bg-gray-200",'text-indigo-500 font-semibold' => $category->slug == request('category')])>{{ $category->name }}</a>
+            <a href="/?category={{$category->slug}}{{request('search') ? "&search=".request('search') : ''}}{{request('username') ? "&username=".request('username') : ''}}" @class(["px-3 py-1 text-sm bg-indigo-50 rounded hover:bg-gray-200",'text-indigo-500 font-semibold' => $category->slug == request('category')])>{{ $category->name }}</a>
         @endforeach
     </div>
 </div>
