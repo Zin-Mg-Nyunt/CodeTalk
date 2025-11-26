@@ -1,4 +1,5 @@
  <!-- BLOG CARDS -->
+ @props(['blogs']);
  <section id="blogs" class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
     <!-- Main column with cards -->
     <div class="lg:col-span-2 space-y-6">
@@ -24,25 +25,25 @@
 
         <!-- Grid of small cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            @for ($i = 0; $i < 4; $i++)
-            <article class="bg-white rounded-lg shadow overflow-hidden">
-                <div class="flex">
-                    <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="thumb" class="w-36 h-36 object-cover" />
-                    <div class="p-4 flex-1">
-                        <h3 class="font-semibold">Post title example #{!! $i + 1 !!}</h3>
-                        <p class="mt-2 text-sm text-gray-600">Short excerpt that summarizes the article content and entices the reader to click through.</p>
-                        <div class="mt-3 flex items-center justify-between">
-                            <div class="text-xs text-gray-500">Nov 24, 2025</div>
-                            <a href="#" class="text-indigo-600 text-sm">Read</a>
+            @foreach ($blogs as $blog)
+                <article class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="flex">
+                        <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="thumb" class="w-36 h-36 object-cover" />
+                        <div class="p-4 flex-1">
+                            <h3 class="font-semibold">{{ $blog->title }}</h3>
+                            <p class="mt-2 text-sm text-gray-600 line-clamp-2">{{ $blog->body }}</p>
+                            <div class="mt-3 flex items-center justify-between">
+                                <div class="text-xs text-gray-500">{{ $blog->created_at->diffForHumans() }}</div>
+                                <a href="#" class="text-indigo-600 text-sm">Read</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </article>
-            @endfor
+                </article>
+            @endforeach
         </div>
 
         <!-- Pagination (above footer) -->
-        <nav class="mt-6 bg-white p-4 rounded-lg shadow flex items-center justify-between">
+        {{-- <nav class="mt-6 bg-white p-4 rounded-lg shadow flex items-center justify-between">
             <div>
                 <p class="text-sm text-gray-600">Showing <strong>1</strong> to <strong>9</strong> of <strong>72</strong> results</p>
             </div>
@@ -53,7 +54,9 @@
                 <a href="#" class="px-3 py-1 rounded bg-gray-100">3</a>
                 <a href="#" class="px-3 py-1 rounded bg-gray-100">Next</a>
             </div>
-        </nav>
+        </nav> --}}
+        {{$blogs->links()}}
+
     </div>
     
     <x-sidebar-section />
