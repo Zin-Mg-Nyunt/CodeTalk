@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -15,8 +15,20 @@ class BlogController extends Controller
         ]);
     }
     public function show(Blog $blog){
+       
         return view('blogs.show',[
             "blog"=>$blog,
         ]);
+    }
+    public function storeComment(Blog $blog){
+        $comment=request()->validate([
+            'comment'=>'required|max:500',
+        ]);
+        $blog->comments()->create([
+            'body'=>$comment['comment'],
+            'blog_id'=>$blog->id,
+            'user_id'=>Auth::id(),
+        ]);
+        return back();
     }
 }

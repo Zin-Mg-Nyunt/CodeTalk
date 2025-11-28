@@ -10,13 +10,16 @@ class Blog extends Model
     /** @use HasFactory<\Database\Factories\BlogFactory> */
     use HasFactory;
     protected $guarded = ['id'];
-    protected $with = ['category','author'];
+    protected $with = ['category','author','comments'];
 
     public function category(){
         return $this->belongsTo(Category::class);
     }
     public function author(){
         return $this->belongsTo(User::class,'user_id');
+    }
+    public function comments(){
+        return $this->hasMany(Comment::class);
     }
     public function scopeFilter($query,$filter){
         $query->when($filter['category']??false,function($query,$slug){
