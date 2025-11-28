@@ -26,10 +26,18 @@
 					<div class="flex items-center space-x-4">
 						@auth
 							<a href="/" class="hidden sm:inline-flex items-center px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">New Post</a>
-							<form action="/logout" method="POST" class="inline">
-								@csrf
-								<button type="submit" class="hidden sm:inline-flex items-center px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Logout</button>
-							</form>
+
+							<div class="relative">
+								<button id="user-menu-button" aria-expanded="false" class="hidden sm:inline-flex items-center p-0 rounded-full focus:outline-none" title="Open user menu">
+									<span class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-medium uppercase cursor-pointer">{{ substr(Auth::user()->name,0,2) }}</span>
+								</button>
+								<div id="user-dropdown" class="hidden absolute right-0 mt-2 bg-indigo-600 rounded shadow z-50">
+									<form method="POST" action="{{ route('logout') }}">
+										@csrf
+										<button type="submit" class=" w-auto text-left px-4 py-2 text-sm text-white hover:bg-indigo-700 rounded cursor-pointer">Logout</button>
+									</form>
+								</div>
+							</div>
 						@else
 							<a href="/register" class="hidden sm:inline-flex items-center px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Register</a>
 							<a href="/login" class="hidden sm:inline-flex items-center px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Login</a>
@@ -69,20 +77,40 @@
 			</div>
 		</footer>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const toggleButton = document.querySelector('[data-menu-toggle]');
-                const mobileMenu = document.getElementById('mobile-menu');
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				const toggleButton = document.querySelector('[data-menu-toggle]');
+				const mobileMenu = document.getElementById('mobile-menu');
 
-                if (!toggleButton || !mobileMenu) {
-                    return;
-                }
+				if (toggleButton && mobileMenu) {
+					toggleButton.addEventListener('click', () => {
+						const isHidden = mobileMenu.classList.toggle('hidden');
+						toggleButton.setAttribute('aria-expanded', (!isHidden).toString());
+					});
+				}
 
-                toggleButton.addEventListener('click', () => {
-                    const isOpen = mobileMenu.classList.toggle('hidden');
-                    toggleButton.setAttribute('aria-expanded', (!isOpen).toString());
-                });
-            });
-        </script>
+				const userBtn = document.getElementById('user-menu-button');
+				const userDropdown = document.getElementById('user-dropdown');
+
+				if (userBtn && userDropdown) {
+					userBtn.addEventListener('click', (e) => {
+						e.stopPropagation();
+						const isHidden = userDropdown.classList.toggle('hidden');
+						userBtn.setAttribute('aria-expanded', (!isHidden).toString());
+					});
+
+					// Close dropdown when clicking outside
+					document.addEventListener('click', (e) => {
+						if (!userDropdown.classList.contains('hidden')) {
+							const clickedInside = e.target.closest && (e.target.closest('#user-dropdown') || e.target.closest('#user-menu-button'));
+							if (!clickedInside) {
+								userDropdown.classList.add('hidden');
+								userBtn.setAttribute('aria-expanded', 'false'); 
+							}
+						}
+					});
+				}
+			});
+		</script>
 	</body>
 </html>
