@@ -1,5 +1,5 @@
  <!-- BLOG CARDS -->
- @props(['blogs'])
+ @props(['blogs','randomBlogs'])
  <section id="blogs" class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
     <!-- Main column with cards -->
     <div class="lg:col-span-2 space-y-6">
@@ -52,5 +52,5 @@
     </div>
     
     
-    <x-sidebar-section />
+    <x-sidebar-section :randomBlogs="$randomBlogs"/>
 </section>

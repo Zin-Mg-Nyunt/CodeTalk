@@ -38,7 +38,7 @@
 					<x-comment-section :blog="$blog" :comments="$blog->comments()->with('author')->latest()->get()"/>
 
 					<div class="space-y-6" id="contact">
-						<x-random-blog-section />
+						<x-random-blog-section :randomBlogs="$randomBlogs"/>
 						<x-subscribed-card />
 					</div>
 				</section>

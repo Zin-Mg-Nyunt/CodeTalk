@@ -1,3 +1,4 @@
+@props(['randomBlogs'])
     <!-- Sidebar: categories / popular tags / random blog -->
     <aside class="space-y-6">
         <div class="bg-white rounded-lg shadow p-4">
@@ -18,7 +19,7 @@
             </ul>
         </div>
 
-        <x-random-blog-section />
+        <x-random-blog-section :randomBlogs="$randomBlogs"/>
 
         <x-subscribed-card />
     </aside>

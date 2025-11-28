@@ -24,9 +24,9 @@
                     @csrf
                     @auth      
                         @if (auth()->user()->isSubscribed($blog))
-                            <button type="submit" class="px-4 py-2 bg-white text-red-600 rounded hover:bg-gray-100 cursor-pointer">Unsubscribe</button>
+                            <button type="submit" class="px-4 py-2 bg-white text-red-600 rounded hover:bg-gray-100 cursor-pointer active:ring-3 active:ring-gray-200">Unsubscribe</button>
                         @else
-                            <button type="submit" class="px-4 py-2 bg-white text-yellow-600 rounded hover:bg-gray-100 cursor-pointer">Subscribe</button>
+                            <button type="submit" class="px-4 py-2 bg-white text-yellow-600 rounded hover:bg-gray-100 cursor-pointer active:ring-3 active:ring-gray-200">Subscribe</button>
                         @endif
                     @endauth
                 </form>
