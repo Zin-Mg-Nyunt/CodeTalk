@@ -29,4 +29,20 @@ class AuthController extends Controller
     {
         return view('auth.login');
     }
+    public function login(Request $request){
+        $credential=$request->validate([
+            'email'=>'required|email|exists:users,email',
+            'password'=>'required|string|min:8',
+        ]);
+        if (Auth::attempt($credential)) {
+            return redirect('/')->with('success','Welcome back, Dear ' .Auth::user()->name);
+        }else{
+            return back()->withErrors(['email'=>'The provided credentials do not match our records.'])->withInput();
+        }
+    }   
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/')->with('success','You have been logged out successfully.');
+    }
 }

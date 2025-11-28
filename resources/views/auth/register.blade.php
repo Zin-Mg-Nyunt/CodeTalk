@@ -54,6 +54,6 @@
             </div>
         </form>
     
-    <p class="text-sm text-center text-gray-600 mt-4">Already registered? <a href="{{ route('login') }}" class="text-indigo-600 hover:underline">login in</a></p>
-</div>
+        <p class="text-sm text-center text-gray-600 mt-4">Already registered? <a href="{{ route('login.form') }}" class="text-indigo-600 hover:underline">login in</a></p>
+    </div>
 </x-layout-section>
