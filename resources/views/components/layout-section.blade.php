@@ -24,7 +24,12 @@
 						</div>
 					</div>
 					<div class="flex items-center space-x-4">
-						<a href="/" class="hidden sm:inline-flex items-center px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">New Post</a>
+						@auth
+							<a href="/" class="hidden sm:inline-flex items-center px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">New Post</a>
+						@else
+							<a href="/register" class="hidden sm:inline-flex items-center px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Register</a>
+							<a href="/login" class="hidden sm:inline-flex items-center px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Login</a>
+						@endauth
 						<button data-menu-toggle class="md:hidden p-2 rounded hover:bg-gray-100" aria-expanded="false" aria-controls="mobile-menu">
                             ☰
                         </button>
@@ -42,7 +47,7 @@
 		</nav>
             {{$slot}}
         <!-- FOOTER -->
-		<footer class="mt-12 bg-gray-100 shadow-2xl">
+		<footer class="mt-12 bg-gray-50 shadow-xl">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row justify-between gap-6">
 				<div>
 					<div class="text-xl font-semibold text-indigo-600">CodeTalk</div>

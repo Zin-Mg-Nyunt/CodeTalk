@@ -6,9 +6,9 @@
             <button class="px-3 py-1 text-sm bg-gray-900 text-white rounded">Leave a comment</button>
         </div>
         <p class="text-sm text-gray-600">You can wire this up to your favorite comment system later. For now, we prefill a few sample threads to show spacing.</p>
-        <div class="space-y-4  overflow-auto h-100">
+        <div class="space-y-4  overflow-auto h-100" style=" scrollbar-width: none;">
             @foreach (range(1, 4) as $comment)
-                <div class="flex gap-3">
+                <div class="flex gap-3" style="">
                     <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&auto=format&fit=crop" alt="Commenter" class="w-12 h-12 rounded-full object-cover" />
                     <div class="flex-1">
                         <p class="text-sm font-semibold">Commenter {{ $comment }}</p>

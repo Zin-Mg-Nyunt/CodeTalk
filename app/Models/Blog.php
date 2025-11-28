@@ -9,6 +9,7 @@ class Blog extends Model
 {
     /** @use HasFactory<\Database\Factories\BlogFactory> */
     use HasFactory;
+    protected $guarded = ['id'];
     protected $with = ['category','author'];
 
     public function category(){
