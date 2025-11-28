@@ -35,7 +35,7 @@
 				</section>
 
 				<section class="grid gap-6 lg:grid-cols-[1fr_320px]">
-					<x-comment-section :blog="$blog" :comments="$blog->comments()->latest()->get()"/>
+					<x-comment-section :blog="$blog" :comments="$blog->comments()->with('author')->latest()->get()"/>
 
 					<div class="space-y-6" id="contact">
 						<x-random-blog-section />

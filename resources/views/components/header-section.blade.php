@@ -11,7 +11,7 @@
         <p class="text-lg text-white/90 max-w-3xl">A reference layout you can copy into any Laravel project while you wire up the backend later. Packed with sections for hero content, article body, table of contents, callouts, author profile, comments, and newsletter opt-in.</p>
         <div class="flex flex-wrap items-center gap-4 text-sm">
             <div class="flex items-center gap-3">
-                <img src="https://images.unsplash.com/photo-1504593811423-6dd665756598?w=100&h=100&auto=format&fit=crop" alt="Author" class="w-12 h-12 rounded-full object-cover border border-white/40" />
+                <img src="{{ $blog->author->avatar?? strtoupper(substr($blog->author->name,0,2)) }}" alt="Author" class="w-12 h-12 rounded-full object-cover border border-white/40" />
                 <div>
                     <p class="font-semibold">{{ $blog->author->name }}</p>
                     <p class="text-white/70">Product Engineer @ CodeTalk</p>
@@ -20,6 +20,16 @@
             <div class="flex items-center gap-3">
                 <button class="px-4 py-2 rounded border border-white/50 hover:bg-white/10">Share</button>
                 <button class="px-4 py-2 bg-white text-indigo-600 rounded hover:bg-gray-100">Download PDF</button>
+                <form action="{{ route('subscription.handle',$blog->slug) }}" method="POST">
+                    @csrf
+                    @auth      
+                        @if (auth()->user()->isSubscribed($blog))
+                            <button type="submit" class="px-4 py-2 bg-white text-red-600 rounded hover:bg-gray-100 cursor-pointer">Unsubscribe</button>
+                        @else
+                            <button type="submit" class="px-4 py-2 bg-white text-yellow-600 rounded hover:bg-gray-100 cursor-pointer">Subscribe</button>
+                        @endif
+                    @endauth
+                </form>
             </div>
         </div>
     </div>

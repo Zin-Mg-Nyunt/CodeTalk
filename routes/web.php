@@ -16,3 +16,4 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::post('/blogs/{blog:slug}/comment',[BlogController::class,"storeComment"])->name('comment.store');
+Route::post('/blogs/{blog:slug}/subscription',[BlogController::class,"subscriptionHandler"])->name('subscription.handle');

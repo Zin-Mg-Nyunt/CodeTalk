@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
@@ -29,6 +30,15 @@ class BlogController extends Controller
             'blog_id'=>$blog->id,
             'user_id'=>Auth::id(),
         ]);
+        return back();
+    }
+    public function subscriptionHandler(Blog $blog){
+        $user = User::find(Auth::id());
+        if($user->isSubscribed($blog)){
+            $blog->unSubscribe();
+        }else{
+            $blog->subscribe();
+        }
         return back();
     }
 }

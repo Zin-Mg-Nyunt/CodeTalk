@@ -44,7 +44,7 @@
         @endauth
 
         {{-- Comments list --}}
-        <div class="pt-2 border-t border-gray-100 space-y-4 max-h-72 overflow-auto">
+        <div class="pt-2 border-t border-gray-100 space-y-4 max-h-70 overflow-auto">
             @foreach ($comments as $comment)
                 <div class="flex gap-3">
                     @if ($comment->author->avatar)

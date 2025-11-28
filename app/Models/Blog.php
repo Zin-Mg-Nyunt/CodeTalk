@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Blog extends Model
 {
     /** @use HasFactory<\Database\Factories\BlogFactory> */
     use HasFactory;
     protected $guarded = ['id'];
-    protected $with = ['category','author','comments'];
+    protected $with = ['category','author'];
 
     public function category(){
         return $this->belongsTo(Category::class);
@@ -21,6 +22,16 @@ class Blog extends Model
     public function comments(){
         return $this->hasMany(Comment::class);
     }
+    public function subscribers(){
+        return $this->belongsToMany(User::class,'blog_user');
+    }
+    public function unSubscribe(){
+        $this->subscribers()->detach(Auth::id());
+    }
+    public function subscribe(){
+        $this->subscribers()->attach(Auth::id());
+    }
+
     public function scopeFilter($query,$filter){
         $query->when($filter['category']??false,function($query,$slug){
             $query->whereHas('category',function($query) use($slug){
