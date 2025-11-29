@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BlogController::class,"index"]);
@@ -15,5 +16,5 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::post('/blogs/{blog:slug}/comment',[BlogController::class,"storeComment"])->name('comment.store');
+Route::post('/blogs/{blog:slug}/comment',[CommentController::class,"storeComment"])->name('comment.store');
 Route::post('/blogs/{blog:slug}/subscription',[BlogController::class,"subscriptionHandler"])->name('subscription.handle');

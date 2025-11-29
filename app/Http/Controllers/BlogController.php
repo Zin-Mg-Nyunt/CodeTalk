@@ -29,17 +29,6 @@ class BlogController extends Controller
             return Blog::inRandomOrder()->take(3)->get();
         });
     }
-    public function storeComment(Blog $blog){
-        $comment=request()->validate([
-            'comment'=>'required|max:500',
-        ]);
-        $blog->comments()->create([
-            'body'=>$comment['comment'],
-            'blog_id'=>$blog->id,
-            'user_id'=>Auth::id(),
-        ]);
-        return back();
-    }
     public function subscriptionHandler(Blog $blog){
         $user = User::find(Auth::id());
         if($user->isSubscribed($blog)){
