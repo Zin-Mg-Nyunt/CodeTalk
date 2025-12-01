@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 
 class Blog extends Model
 {
@@ -25,11 +24,11 @@ class Blog extends Model
     public function subscribers(){
         return $this->belongsToMany(User::class,'blog_user');
     }
-    public function unSubscribe(){
-        $this->subscribers()->detach(Auth::id());
+    public function unSubscribe($user){
+        $this->subscribers()->detach($user->id);
     }
-    public function subscribe(){
-        $this->subscribers()->attach(Auth::id());
+    public function subscribe($user){
+        $this->subscribers()->attach($user->id);
     }
 
     public function scopeFilter($query,$filter){
