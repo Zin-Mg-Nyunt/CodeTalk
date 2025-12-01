@@ -25,7 +25,9 @@
 					</div>
 					<div class="flex items-center space-x-4">
 						@auth
-							<a href="/" class="hidden sm:inline-flex items-center px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">New Post</a>
+							@if (auth()->user()->is_admin)
+								<a href="{{route('admin.blogs.create')}}" class="hidden sm:inline-flex items-center px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">New Blog</a>
+							@endif
 
 							<div class="relative">
 								<button id="user-menu-button" aria-expanded="false" class="hidden sm:inline-flex items-center p-0 rounded-full focus:outline-none" title="Open user menu">
