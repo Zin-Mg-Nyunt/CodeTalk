@@ -7,14 +7,17 @@
             <span>•</span>
             <span>12 min read</span>
         </div>
+        <img src="{{ $blog->thumbnail ?? 'https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder' }}" alt="" class="w-full h-64 sm:h-80 md:h-96 object-cover rounded-lg shadow-lg"/>
         <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">{{ $blog->title }}</h1>
-        <p class="text-lg text-white/90 max-w-3xl">A reference layout you can copy into any Laravel project while you wire up the backend later. Packed with sections for hero content, article body, table of contents, callouts, author profile, comments, and newsletter opt-in.</p>
         <div class="flex flex-wrap items-center gap-4 text-sm">
             <div class="flex items-center gap-3">
-                <img src="{{ $blog->author->avatar?? strtoupper(substr($blog->author->name,0,2)) }}" alt="Author" class="w-12 h-12 rounded-full object-cover border border-white/40" />
-                <div>
-                    <p class="font-semibold">{{ $blog->author->name }}</p>
-                    <p class="text-white/70">Product Engineer @ CodeTalk</p>
+                @if ($blog->author->avatar)
+                    <img src="{{ $blog->author->avatar }}" alt="" class="w-10 h-10 rounded-full object-cover cursor-pointer">
+				@else
+					<span class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-medium uppercase cursor-pointer">{{ substr($blog->author->name,0,2) }}</span>
+				@endif
+                <p class="font-semibold">{{ $blog->author->name }}</p>
+                <p class="text-white/70">Product Engineer @ CodeTalk</p>
                 </div>
             </div>
             <div class="flex items-center gap-3">

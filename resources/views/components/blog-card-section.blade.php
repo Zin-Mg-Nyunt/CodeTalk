@@ -30,7 +30,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 @foreach ($blogs as $blog)
                     <article class="bg-white rounded-lg shadow overflow-hidden flex">
-                                <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="thumb" class="w-36 h-auto" />
+                                <img src="{{ $blog->thumbnail ?? 'https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder' }}" alt="thumb" class="w-36 h-auto" />
                                 <div class="p-4 flex-1 space-y-2">
                                     <div class=" space-x-1">
                                         <a href="/?username={{$blog->author->username}}{{request('category') ? '&category='.request('category') : ''}}{{request('search') ? '&search='.request('search') : ''}}" class=" text-sm font-bold text-gray-500">{{ $blog->author->name }}</a>

@@ -19,6 +19,7 @@ class AdminController extends Controller
             "body"=>"required|min:20",
             "category_id"=>"required|exists:categories,id",
         ]);
+        $newBlog['thumbnail'] = asset("/storage/".request('thumbnail')->store('thumbnails'));
         auth()->user()->blogs()->create($newBlog);
         return redirect('/')->with('success','Blog created successfully!');
     }

@@ -19,10 +19,14 @@
 							</div>
 						</div>
 						<div class="rounded-2xl py-5 flex flex-col sm:flex-row gap-4 sm:items-center">
-							<img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=200&h=200&auto=format&fit=crop" alt="Author" class="w-15 h-15 rounded-full object-cover" />
+							@if ($blog->author->avatar)
+								<img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=200&h=200&auto=format&fit=crop" alt="Author" class="w-15 h-15 rounded-full object-cover" />
+							@else
+								<span class="w-30 h-15 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-medium uppercase cursor-pointer">{{ substr($blog->author->name,0,2) }}</span>
+							@endif
 							<div>
 								<p class="text-sm uppercase tracking-wide text-gray-500">Written by</p>
-								<p class="text-xl font-semibold">Sierra Patel</p>
+								<p class="text-xl font-semibold">{{$blog->author->name}}</p>
 								<p class="text-gray-600">Sierra leads the content platform team at CodeTalk.</p>
 								<div class="flex items-center gap-4 text-sm text-indigo-600 mt-3">
 									<a href="#">Twitter</a>
