@@ -13,7 +13,7 @@
         'Comments' => 'text-orange-600',
     };
     $route = match($title) {
-        'Blogs' => 'admin.blogs',
+        'Blogs' => 'admin.index',
         'Categories' => 'admin.categories',
         'Users' => 'admin.users',
         'Comments' => 'admin.comments',

@@ -23,12 +23,16 @@ Route::get('/logout', function(){
 
 Route::middleware(['admin'])->group(function(){
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/blogs', [AdminController::class, 'index'])->name('admin.blogs');
+    Route::get('/admin/blogs', [AdminController::class, 'index'])->name('admin.index');
+    // for version 2
     Route::get('/admin/categories', [AdminController::class, 'index'])->name('admin.categories');
     Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users');
     Route::get('/admin/comments', [AdminController::class, 'index'])->name('admin.comments');
-    
+
     Route::get('/admin/blogs/create', [AdminController::class, 'create'])->name('admin.blogs.create');
     Route::post('/admin/blogs/store', [AdminController::class, 'store'])->name('admin.blogs.store');
+    Route::get('/admin/blogs/{blog:slug}/edit', [AdminController::class, 'edit'])->name('admin.blogs.edit');
+    Route::patch('/admin/blogs/{blog:slug}/update', [AdminController::class, 'update'])->name('admin.blogs.update');
+
 });
 
