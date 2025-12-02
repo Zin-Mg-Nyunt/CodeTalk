@@ -67,4 +67,8 @@ class AdminController extends Controller
         $blog->save();
         return redirect(route('admin.index'))->with('success','Blog update successfully!');
     }
+    public function destroy(Blog $blog){
+        $blog->delete();
+        return redirect(route('admin.index'))->with('success','Blog deleted successfully!');
+    }
 }

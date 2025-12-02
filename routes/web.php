@@ -33,6 +33,6 @@ Route::middleware(['admin'])->group(function(){
     Route::post('/admin/blogs/store', [AdminController::class, 'store'])->name('admin.blogs.store');
     Route::get('/admin/blogs/{blog:slug}/edit', [AdminController::class, 'edit'])->name('admin.blogs.edit');
     Route::patch('/admin/blogs/{blog:slug}/update', [AdminController::class, 'update'])->name('admin.blogs.update');
-
+    Route::delete('/admin/blogs/{blog}/delete',[AdminController::class, 'destroy'])->name('admin.blogs.delete');
 });
 
