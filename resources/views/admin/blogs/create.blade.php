@@ -28,7 +28,7 @@
 
             <div>
                 <label for="body" class="block text-sm font-medium text-gray-700">Body</label>
-                <textarea id="body" name="body" rows="8" required class="mt-1 block w-full rounded border border-gray-200 px-3 py-2 resize-y focus:outline-none focus:ring-2 focus:ring-indigo-300">{{ old('body') }}</textarea>
+                <textarea id="body" name="body" rows="8" class="editor mt-1 block w-full rounded border border-gray-200 px-3 py-2 resize-y focus:outline-none focus:ring-2 focus:ring-indigo-300 form-control">{{ old('body') }}</textarea>
                 @error('body') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
             </div>
 

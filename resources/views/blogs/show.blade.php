@@ -5,7 +5,7 @@
 			<div class="bg-white rounded-2xl shadow-xl p-6 sm:p-10 space-y-10">
 				<section class="grid gap-6 lg:grid-cols-[1fr_320px]">
 					<article class="prose max-w-none" id="blog">
-						<p>{{ $blog->body }}</p>
+						<p>{!! $blog->body !!}</p>
 					</article>
 
 					<aside class="lg:sticky lg:top-8 bg-gray-50 border border-gray-100 rounded-2xl p-6 space-y-6" id="resources">

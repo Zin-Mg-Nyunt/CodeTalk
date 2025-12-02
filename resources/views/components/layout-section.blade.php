@@ -9,6 +9,17 @@
 		@else
 			<link rel="stylesheet" href="/css/app.css">
 		@endif
+		<link rel="stylesheet" href="/ckeditor/ckeditor.css">
+		<link
+			rel="stylesheet"
+			href="https://cdn.ckeditor.com/ckeditor5/47.2.0/ckeditor5.css"
+			crossorigin
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.ckeditor.com/ckeditor5-premium-features/47.2.0/ckeditor5-premium-features.css"
+			crossorigin
+		/>
 	</head>
 	<body class="antialiased bg-gray-50 text-gray-800">
 		<!-- NAVBAR -->
@@ -118,5 +129,14 @@
 				}
 			});
 		</script>
+		<script
+			src="https://cdn.ckeditor.com/ckeditor5/47.2.0/ckeditor5.umd.js"
+			crossorigin
+		></script>
+		<script
+			src="https://cdn.ckeditor.com/ckeditor5-premium-features/47.2.0/ckeditor5-premium-features.umd.js"
+			crossorigin
+		></script>
+		<script src="/ckeditor/ckeditor.js"></script>
 	</body>
 </html>
