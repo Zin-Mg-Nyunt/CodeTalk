@@ -1,5 +1,5 @@
 @props(["categories"])
-<x-layout-section>
+<x-admin-layout>
     <main class="max-w-4xl mx-auto mt-12 bg-white p-8 rounded-lg shadow">
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-2xl font-semibold text-gray-800">Create Blog</h1>
@@ -59,4 +59,4 @@
         })
        })
     </script>
-</x-layout-section>
+</x-admin-layout>
