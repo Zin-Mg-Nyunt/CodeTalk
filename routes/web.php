@@ -21,7 +21,7 @@ Route::get('/logout', function(){
     return redirect('/');
 });
 
-Route::middleware(['admin'])->group(function(){
+Route::middleware(['can:admin'])->group(function(){
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/blogs', [AdminController::class, 'index'])->name('admin.index');
     // for version 2

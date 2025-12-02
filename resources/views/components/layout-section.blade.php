@@ -36,10 +36,6 @@
 					</div>
 					<div class="flex items-center space-x-4">
 						@auth
-							@if (auth()->user()->is_admin)
-								<a href="{{route('admin.dashboard')}}" class="hidden sm:inline-flex items-center px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Dashboard</a>
-							@endif
-
 							<div class="relative">
 								<button id="user-menu-button" aria-expanded="false" class="hidden sm:inline-flex items-center p-0 rounded-full focus:outline-none" title="Open user menu">
 									@if (Auth::user()->avatar)
@@ -48,11 +44,11 @@
 										<span class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-medium uppercase cursor-pointer">{{ substr(Auth::user()->name,0,2) }}</span>
 									@endif
 								</button>
-								<div id="user-dropdown" class="hidden absolute right-0 mt-2 bg-indigo-600 rounded shadow z-50">
-									<form method="POST" action="{{ route('logout') }}">
-										@csrf
-										<button type="submit" class=" w-auto text-left px-4 py-2 text-sm text-white hover:bg-indigo-700 rounded cursor-pointer">Logout</button>
-									</form>
+								<div id="user-dropdown" class="hidden absolute right-0 bg-white rounded shadow z-50">
+									@can('admin')
+										<a href="{{route('admin.dashboard')}}" class="hidden sm:inline-flex items-center px-3 py-2  text-indigo-600 hover:text-indigo-700 rounded bg:gray-50">Dashboard</a>
+									@endcan
+									<x-logout />
 								</div>
 							</div>
 						@else
