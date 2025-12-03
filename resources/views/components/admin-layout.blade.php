@@ -4,11 +4,11 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Admin Dashboard — CodeTalk</title>
-		@if (file_exists(public_path('build/manifest.json')))
+		{{-- @if (file_exists(public_path('build/manifest.json'))) --}}
 			@vite(['resources/css/app.css', 'resources/js/app.js'])
-		@else
+		{{-- @else
 			<link rel="stylesheet" href="/css/app.css">
-		@endif
+		@endif --}}
 	</head>
 	<body class="antialiased bg-gray-50">
 		<div class="flex h-screen">

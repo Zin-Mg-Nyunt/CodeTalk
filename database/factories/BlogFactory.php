@@ -21,7 +21,7 @@ class BlogFactory extends Factory
             "slug"=>fake()->unique()->slug(),
             "body"=>fake()->paragraph(),
             "category_id"=>fake()->numberBetween(1,4),
-            "user_id"=>fake()->numberBetween(1,5)
+            "user_id"=>fake()->numberBetween(1,3)
         ];
     }
 }

@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(5)->create();
+        User::factory(3)->create();
         $categories = [
             [
                 "name"=>"Tutorial",
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
                 "slug"=>$category['slug']
             ]);
         };
-        Blog::factory(10)->create();
+        Blog::factory(5)->create();
 
     }
 }

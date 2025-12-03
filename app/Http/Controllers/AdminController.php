@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
@@ -22,8 +23,12 @@ class AdminController extends Controller
             "body"=>"required|min:20",
             "category_id"=>"required|exists:categories,id",
         ]);
-        $newBlog['thumbnail'] = asset("/storage/".request('thumbnail')->store('thumbnails'));
+        // using s3 to save file global
+        $newBlog['thumbnail'] = request('thumbnail') ? 
+                                Storage::disk('s3')->url(request('thumbnail')?->store('thumbnails','s3')) :
+                                null;
         auth()->user()->blogs()->create($newBlog);
+        cache()->forget('randomBlogs');
         return redirect('/')->with('success','Blog created successfully!');
     }
     public function dashboard(){
@@ -53,8 +58,9 @@ class AdminController extends Controller
             "body"=>"required|min:20",
             "category_id"=>"required|exists:categories,id",
         ]);
+        // using s3 to update file global
         $updateBlog['thumbnail'] = request('thumbnail') ? 
-                                    asset("/storage/".request('thumbnail')->store('thumbnails')) : 
+                                    Storage::disk('s3')->url(request('thumbnail')->store('thumbnails','s3')) : 
                                     $blog->thumbnail;
 
         // just fill data in memory
@@ -65,10 +71,12 @@ class AdminController extends Controller
         }
         // save in db
         $blog->save();
+        cache()->forget('randomBlogs');
         return redirect(route('admin.index'))->with('success','Blog update successfully!');
     }
     public function destroy(Blog $blog){
         $blog->delete();
+        cache()->forget('randomBlogs');
         return redirect(route('admin.index'))->with('success','Blog deleted successfully!');
     }
 }
