@@ -1,55 +1,124 @@
-# CodeTalk — Phase 1 (Laravel Backend)
+# CodeTalk
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Phase-1-blue)](https://github.com/Zin-Mg-Nyunt/CodeTalk)
+A backend-focused Laravel project designed as **Phase One** of a multi-phase full‑stack learning journey. This project demonstrates clean backend architecture, authentication, role-based Tech Stack
 
+**Backend Framework**: Laravel 12
+**Language**: PHP 8.4
+**Database**: MySQL
+**Authentication**: Laravel Breeze
+**File Storage**: AWS S3 (with `s3` disk configuration)
+**Image Handling**: Laravel File Upload
+**Routing & Controllers**: RESTful structure
+**Security**: CSRF protection, middleware-based authorization
 
-**Tech Stack:** Laravel 12, PHP 8.x, MySQL  
-**Project Status:** Phase One Completed — Backend Foundation
+Features, blog management, and modern Laravel practices.
 
----
-
-## Overview
-
-CodeTalk is a **multi-phase web application project** designed for learning and demonstrating full-stack development workflow.  
-
-**Phase 1** focuses solely on the backend, building a clean and maintainable Laravel-based foundation.  
-
-Future phases will integrate frontend frameworks and full-stack features.
+One of the key technical improvements in this project is the transition from **local file storage** to **AWS S3 cloud storage**, allowing the application to handle images more reliably and professionally.
 
 ---
 
-## Features (Phase 1)
+## 🚀 Project Overview
 
-- Laravel project structure setup (routes, controllers, models)
-- Database migrations and schema setup
-- Basic CRUD functionality for posts/blogs (if implemented)
-- Backend-only user authentication (if included)
-- Ready for frontend integration in Phase 2
+CodeTalk is a blog and discussion platform built using **Laravel**. It focuses heavily on backend logic, clean architecture, and real-world development practices.
 
-> ⚠️ **Note:** Phase 1 is backend-only; frontend UI will be implemented in Phase 2 (Vue + Firebase) and Phase 3 (Vue + Inertia + Laravel).
+**Key features include:**
 
----
-
-## Roadmap
-
-| Phase | Tech Stack | Features |
-|-------|------------|---------|
-| **Phase 1** | Laravel Backend | Backend structure, routes, controllers, models, migrations, CRUD |
-| **Phase 2** | Vue 3 + Firebase | Frontend UI, authentication, admin/user roles, client-side rendering |
-| **Phase 3** | Vue 3 + Inertia + Laravel | Full-stack SPA, API-based communication, real-world workflow |
-
+* User authentication (register/login/logout)
+* Blog CRUD operations
+* Request validation
+* Route Model Binding
+* Policies for authorization
+* Image file upload
+* Cloud-based image storage using AWS S3
+* Eloquent relationships
 
 ---
 
-## Installation
+## ☁️ AWS S3 Integration (Important Update)
 
-1. Clone the repository:
+To make this project production-ready, all uploaded images (blog thumbnails) are now stored on **AWS S3** instead of the local `storage/app/public` directory.
 
-```bash
+This provides several real-world benefits:
+
+* Faster and scalable image delivery
+* No need to manage storage on server
+* Works well across multiple deployments or servers
+* Prevents broken images when cloning the project
+* Professional-grade file management like real industry projects
+
+### How it works
+
+When creating a blog, if a thumbnail is uploaded:
+
+* The file is uploaded to S3 (`blog/thumbnails/...`)
+* The database stores the **public S3 URL**
+* The app displays images directly from Amazon S3
+
+If no image is uploaded, the thumbnail column stores `null`.
+
+---
+
+## 🔧 Setup Instructions
+
+### 1. Clone the Repository
+
+```
 git clone https://github.com/Zin-Mg-Nyunt/CodeTalk.git
+cd CodeTalk
+```
+
+### 2. Install Dependencies
+
+```
 composer install
+npm install
+npm run dev
+```
+
+### 3. Configure Environment
+
+Copy `.env.example` to `.env`:
+
+```
 cp .env.example .env
+```
+
+Set up your database credentials.
+
+### 4. Configure AWS S3
+
+Inside `.env`:
+
+```
+FILESYSTEM_DISK=s3
+AWS_ACCESS_KEY_ID=your-key
+AWS_SECRET_ACCESS_KEY=your-secret
+AWS_DEFAULT_REGION=your-region
+AWS_BUCKET=your-s3-bucket
+AWS_URL=https://your-bucket.s3.amazonaws.com
+```
+
+### 5. Generate Key
+
+```
 php artisan key:generate
+```
+
+### 6. Run Migrations
+
+```
 php artisan migrate
-php artisan serve
+```
+
+---
+
+## 🧪 Testing Optional Image Upload
+
+Blog creation supports both cases:
+
+* With thumbnail upload → stored in S3
+* Without thumbnail → saved as `null`
+
+This prevents errors and allows flexible usage.
+
+---
