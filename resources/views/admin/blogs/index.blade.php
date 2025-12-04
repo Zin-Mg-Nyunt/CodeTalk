@@ -1,13 +1,39 @@
+@props(['blogs'])
 <x-admin-layout title="Blogs">
     <div class="flex items-center justify-between mb-6">
         <div>
             <h2 class="text-2xl font-bold text-gray-800">Manage Blogs</h2>
             <p class="text-gray-500 text-sm mt-1">Total: {{ $blogs->count() }} blog posts</p>
         </div>
-        <a href="{{ route('admin.blogs.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            Create New Blog
-        </a>
+        <div class="flex justify-between">
+            <a href="{{ route('admin.blogs.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                Create New Blog
+            </a>
+            <div>
+            <div class="relative ml-3">
+                <button 
+                    data-menu-toggle
+                    id="button"
+                    type="button" 
+                    class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none"
+                    aria-expanded="false" 
+                    aria-controls="dropdownDiv"
+                >
+                    <span>More Actions</span>
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div id="dropdownDiv" class="absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg py-1 z-20">
+                    <div class="flex flex-col items-center space-y-2">
+						<a href="/admin/blogs/?filter=latest" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t-lg">Latest</a>
+                        <a href="/admin/blogs/?filter=most_commented" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t-lg">Most Commented</a>
+					</div>
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
 
     @if (session('success'))
@@ -79,4 +105,25 @@
             </tbody>
         </table>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+            const btn = document.getElementById("button");
+            const dropdownDiv = document.getElementById('dropdownDiv');
+            if (btn && dropdownDiv) {
+                        btn.addEventListener('click', () => {
+                            const isHidden = dropdownDiv.classList.toggle('hidden');
+                            btn.setAttribute('aria-expanded', (!isHidden).toString());
+                        });
+                    }
+            document.addEventListener('click', (e) => {
+				if (!dropdownDiv.classList.contains('hidden')) {
+							const clickedInside = e.target.closest && (e.target.closest('#dropdownDiv') || e.target.closest('#button'));
+							if (!clickedInside) {
+								dropdownDiv.classList.add('hidden');
+								btn.setAttribute('aria-expanded', 'false'); 
+							}
+						}
+					});
+        })
+    </script>
 </x-admin-layout>
