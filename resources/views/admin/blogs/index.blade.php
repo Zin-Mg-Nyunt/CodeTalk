@@ -13,19 +13,17 @@
             <div>
             <div class="relative ml-3">
                 <button 
-                    data-menu-toggle
                     id="button"
                     type="button" 
                     class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none"
                     aria-expanded="false" 
-                    aria-controls="dropdownDiv"
                 >
                     <span>More Actions</span>
                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                     </svg>
                 </button>
-                <div id="dropdownDiv" class="absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg py-1 z-20">
+                <div id="dropdownDiv" class="absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg py-1 z-20 hidden">
                     <div class="flex flex-col items-center space-y-2">
 						<a href="/admin/blogs/?filter=latest" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t-lg">Latest</a>
                         <a href="/admin/blogs/?filter=most_commented" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t-lg">Most Commented</a>
@@ -71,7 +69,7 @@
                             <p class="text-gray-400 text-xs">{{ $blog->created_at->diffForHumans() }}</p>
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-600">
-                            <p class="text-xs text-center">{{ $blog->comments()->count() }}</p>
+                            <p class="text-xs text-center">{{ $blog->comments_count }}</p>
                         </td>
                         <td class="px-6 py-4 text-sm">
                             <div class="flex items-center space-x-2">

@@ -40,15 +40,8 @@ class AdminController extends Controller
         ]);
     }
     public function index(){
-        $blogs=Blog::withCount('comments')->get();
-        if (request('filter') == 'latest') {
-            $blogs= $blogs->sortByDesc('created_at');
-        }
-        if (request('filter') == 'most_commented') {
-            $blogs= $blogs->sortByDesc('comments_count');
-        }
         return view('admin.blogs.index',[
-            'blogs'=> $blogs,
+            'blogs'=> Blog::withCount('comments')->filter(request('filter'))->get()
         ]);
     }
     public function edit(Blog $blog){

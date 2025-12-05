@@ -48,5 +48,8 @@ class Blog extends Model
                 $query->where('username',$username);
             });
         });
+        $query->when($filter == 'latest'??false,fn($query)=>$query->latest());
+        $query->when($filter == 'most_commented'??false,fn($query)=>$query->orderBy('comments_count','desc'));
+
     }
 }
